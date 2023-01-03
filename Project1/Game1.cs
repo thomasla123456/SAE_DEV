@@ -8,6 +8,7 @@ namespace Project1
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private double pipi = 6545;
 
         public Game1()
         {
