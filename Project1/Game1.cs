@@ -6,6 +6,7 @@ namespace Project1
 {
     public class Game1 : Game
     {
+        private double caca = 0;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
