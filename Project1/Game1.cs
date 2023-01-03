@@ -8,7 +8,7 @@ namespace Project1
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private double ouai = 6545;
+        private double ouai = 655;
 
         public Game1()
         {
