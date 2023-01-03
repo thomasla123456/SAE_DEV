@@ -9,6 +9,7 @@ namespace Project1
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private int t = 200;
+        private int tet = 1;
 
 
         public Game1()
