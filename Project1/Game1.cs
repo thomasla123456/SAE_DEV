@@ -11,22 +11,29 @@ namespace Project1
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Texture2D background;
-        private int hauteurFenetre = 988;
-        private int longueuFenetre = 745;
+        private int hauteurFenetre = 900;
+        private int longueurFenetre = 1600;
         private Rectangle bgRect;
 
+        private Vector2 textPos;
+        private SpriteFont textFont;
+        private const string textMsg =" dans le jeu";
 
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-          /* _graphics.ToggleFullScreen();  quand on sera chaud */
+            _graphics.ToggleFullScreen();
         }
 
         protected override void Initialize()
         {
-            Window.Title = "Test";
+            Window.Title = "Game";
+            _graphics.PreferredBackBufferHeight = hauteurFenetre;
+            _graphics.PreferredBackBufferWidth = longueurFenetre;
+           _graphics.ApplyChanges();    
+            Window.AllowUserResizing = false;
 
             base.Initialize();
         }
@@ -35,8 +42,9 @@ namespace Project1
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("Texutres/bg");
-            bgRect = new Rectangle(0, 0, _graphics.GraphicsDevice.Viewport.Width , _graphics.GraphicsDevice.Viewport.Height);  
-            // TODO: use this.Content to load your game content here
+            textFont = Content.Load<SpriteFont>("Fonts/TextFont");
+            bgRect = new Rectangle(0, 0, _graphics.GraphicsDevice.Viewport.Width , _graphics.GraphicsDevice.Viewport.Height);
+            textPos = new Vector2(0,10);
 
         }
 
@@ -55,6 +63,7 @@ namespace Project1
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
             _spriteBatch.Draw(background,bgRect,Color.White);
+            _spriteBatch.DrawString(textFont, textMsg, textPos, Color.Black);
             _spriteBatch.End();
 
             base.Draw(gameTime);
