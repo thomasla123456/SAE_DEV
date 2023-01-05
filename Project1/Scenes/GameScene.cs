@@ -12,14 +12,10 @@ namespace Project1.Scenes
 {
     internal class GameScene : Component
     {
-        private static GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
-        private Texture2D background;
-        private Rectangle bgRect;
+
         internal override void LoadContent(ContentManager Content)
-        {
-            background = Content.Load<Texture2D>("Texutres/bg");
-            bgRect = new Rectangle(0,0,1440,900);   
+        { 
+
         }
 
 
@@ -29,9 +25,7 @@ namespace Project1.Scenes
         }
         internal override void Draw(SpriteBatch spriteBatch)
         {
-            _spriteBatch.Begin();   
-            _spriteBatch.Draw(background, bgRect, Color.White);
-            _spriteBatch.End(); 
+
         }
     }
 }
