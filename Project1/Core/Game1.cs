@@ -92,6 +92,9 @@ namespace Project1.Core
                 textPos.X = 0;
             textPos.X += vitesse;
 
+            if (data.Exit)
+                Exit(); 
+
             base.Update(gameTime);
         }
 
@@ -100,7 +103,7 @@ namespace Project1.Core
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
             gsm.Draw(_spriteBatch);
-            _spriteBatch.Draw(background,bgRect,Color.White);
+            /*_spriteBatch.Draw(background, bgRect, Color.White);*/
             _spriteBatch.Draw(playerText,playerRect,Color.White);
             _spriteBatch.DrawString(textFont, textMsg, textPos, Color.Black);
             _spriteBatch.End();

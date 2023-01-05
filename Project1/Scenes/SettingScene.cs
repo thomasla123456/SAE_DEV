@@ -10,23 +10,24 @@ using Project1.Core;
 
 namespace Project1.Scenes
 {
-    internal class GameScene : Component
-    {
+    internal class SettingScene : Component
 
+    {
+      
 
         internal override void LoadContent(ContentManager Content)
         {
-
+         
         }
-
 
         internal override void Update(GameTime gameTime)
         {
-
+         
         }
+
         internal override void Draw(SpriteBatch spriteBatch)
         {
-
+           
         }
     }
 }
