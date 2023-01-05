@@ -35,7 +35,7 @@ namespace Project1.Core
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            _graphics.ToggleFullScreen();
+            /*_graphics.ToggleFullScreen();*/
         }
 
         protected override void Initialize()
@@ -58,7 +58,7 @@ namespace Project1.Core
             textFont = Content.Load<SpriteFont>("Fonts/TextFont");
             bgRect = new Rectangle(0, 0, _graphics.GraphicsDevice.Viewport.Width , _graphics.GraphicsDevice.Viewport.Height);
             textPos = new Vector2(0,10);
-            player1Text = Content.Load<Texture2D>("Texutres/1");
+            player1Text = Content.Load<Texture2D>("Texutres/perso");
             player1Rect = new Rectangle(500,500,player1Text.Width,player1Text.Height);
             player2Text = Content.Load<Texture2D>("Texutres/2");
             player2Rect = new Rectangle(500, 500, player2Text.Width / 2, player2Text.Height / 2);
@@ -91,6 +91,12 @@ namespace Project1.Core
             if (player1Rect.X < 0)
                 player1Rect.X = longueurEcran;
 
+            if (player1Rect.Y > largeurEcran)
+                player1Rect.Y = 0;
+
+            if (player1Rect.Y < 0)
+                player1Rect.Y = largeurEcran;
+
 
 
             if (kb.IsKeyDown(Keys.Up))
@@ -108,6 +114,12 @@ namespace Project1.Core
 
             if (player2Rect.X < 0)
                 player2Rect.X = longueurEcran;
+
+            if (player2Rect.Y > largeurEcran)
+                player2Rect.Y = 0;
+
+            if (player2Rect.Y < 0)
+                player2Rect.Y = largeurEcran;
 
 
 

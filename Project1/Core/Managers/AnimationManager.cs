@@ -25,7 +25,13 @@ namespace Project1.Core.Managers
 
         public void Draw(SpriteBatch spriteBatch)
         {
-
+            spriteBatch.Draw(_animation.Texture,
+                       Position,
+                       new Rectangle(_animation.CurrentFrame * _animation.FrameWidth,
+                                     0,
+                                     _animation.FrameWidth,
+                                     _animation.FrameHeight),
+                       Color.White);
         }
 
         public void Play(Animation animation)
@@ -40,6 +46,7 @@ namespace Project1.Core.Managers
 
         public void Update(GameTime gameTime)
         { 
+
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tutorial011.Models
+namespace Project1.Models
 {
     public class Animation
     {
