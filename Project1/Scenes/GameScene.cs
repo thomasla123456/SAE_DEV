@@ -19,7 +19,7 @@ namespace Project1.Scenes
         internal override void LoadContent(ContentManager Content)
         {
             background = Content.Load<Texture2D>("Texutres/bg");
-            bgRect = new Rectangle(0, 0,500, 500);
+            bgRect = new Rectangle(0,0,1440,900);   
         }
 
 
