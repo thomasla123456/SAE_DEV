@@ -25,7 +25,7 @@ namespace Project1.Core.Managers
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_animation.Texture,Position);
+
         }
 
         public void Play(Animation animation)

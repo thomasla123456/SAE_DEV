@@ -26,7 +26,7 @@ namespace Project1.Scenes
             for (int i = 0; i < btns.Length; i++)
             {
                 btns[i] = Content.Load<Texture2D>($"Texutres/btn{i}");
-                btnRect[i] = new Rectangle(data.longueurEcran/2, 0 +( INCREMENT*i), btns[i].Width/2, btns[i].Height/2);
+                btnRect[i] = new Rectangle(580, 0 +( INCREMENT*i), btns[i].Width/2, btns[i].Height/2);
             }
              
         }

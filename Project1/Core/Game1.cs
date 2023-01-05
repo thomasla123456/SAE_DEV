@@ -23,8 +23,10 @@ namespace Project1.Core
         private const string textMsg ="Pessi game";
 
         private const int taillePerso = 100;
-        private Texture2D playerText;
-        private Rectangle playerRect;
+        private Texture2D player1Text;
+        private Rectangle player1Rect;
+        private Texture2D player2Text;
+        private Rectangle player2Rect;
         private KeyboardState kb;
         private const int vitesse = 5;
 
@@ -56,9 +58,11 @@ namespace Project1.Core
             textFont = Content.Load<SpriteFont>("Fonts/TextFont");
             bgRect = new Rectangle(0, 0, _graphics.GraphicsDevice.Viewport.Width , _graphics.GraphicsDevice.Viewport.Height);
             textPos = new Vector2(0,10);
-            playerText = Content.Load<Texture2D>("Texutres/1");
-            playerRect = new Rectangle(500,500,playerText.Width/2,playerText.Height/2);
-           
+            player1Text = Content.Load<Texture2D>("Texutres/perso");
+            player1Rect = new Rectangle(500,500,player1Text.Width,player1Text.Height);
+            player2Text = Content.Load<Texture2D>("Texutres/2");
+            player2Rect = new Rectangle(500, 500, player2Text.Width / 2, player2Text.Height / 2);
+
 
         }
 
@@ -72,22 +76,41 @@ namespace Project1.Core
            kb = Keyboard.GetState();
 
             if (kb.IsKeyDown(Keys.Z))
-                playerRect.Y -= vitesse;
+                player1Rect.Y -= vitesse;
             else if (kb.IsKeyDown(Keys.S))
-                playerRect.Y += vitesse;
+                player1Rect.Y += vitesse;
 
             if (kb.IsKeyDown(Keys.D))
-                playerRect.X += vitesse;
+                player1Rect.X += vitesse;
             else if (kb.IsKeyDown(Keys.Q))
-                playerRect.X -= vitesse;
+                player1Rect.X -= vitesse;
 
-            if (playerRect.X > longueurEcran)
-                playerRect.X =  0;
+            if (player1Rect.X > longueurEcran)
+                player1Rect.X =  0;
 
-            if (playerRect.X < 0)
-                playerRect.X = longueurEcran;
+            if (player1Rect.X < 0)
+                player1Rect.X = longueurEcran;
 
-            
+
+
+            if (kb.IsKeyDown(Keys.Up))
+                player2Rect.Y -= vitesse;
+            else if (kb.IsKeyDown(Keys.Down))
+                player2Rect.Y += vitesse;
+
+            if (kb.IsKeyDown(Keys.Right))
+                player2Rect.X += vitesse;
+            else if (kb.IsKeyDown(Keys.Left))
+                player2Rect.X -= vitesse;
+
+            if (player2Rect.X > longueurEcran)
+                player2Rect.X = 0;
+
+            if (player2Rect.X < 0)
+                player2Rect.X = longueurEcran;
+
+
+
             if (textPos.X > longueurEcran)
                 textPos.X = 0;
             textPos.X += vitesse;
@@ -102,9 +125,10 @@ namespace Project1.Core
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
+            _spriteBatch.Draw(background, bgRect, Color.White);
             gsm.Draw(_spriteBatch);
-            /*_spriteBatch.Draw(background, bgRect, Color.White);*/
-            _spriteBatch.Draw(playerText,playerRect,Color.White);
+            _spriteBatch.Draw(player2Text, player2Rect, Color.White);
+            _spriteBatch.Draw(player1Text,player1Rect,Color.White);
             _spriteBatch.DrawString(textFont, textMsg, textPos, Color.Black);
             _spriteBatch.End();
 
