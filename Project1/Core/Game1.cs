@@ -58,7 +58,7 @@ namespace Project1.Core
             textFont = Content.Load<SpriteFont>("Fonts/TextFont");
             bgRect = new Rectangle(0, 0, _graphics.GraphicsDevice.Viewport.Width , _graphics.GraphicsDevice.Viewport.Height);
             textPos = new Vector2(0,10);
-            player1Text = Content.Load<Texture2D>("Texutres/perso");
+            player1Text = Content.Load<Texture2D>("Texutres/1");
             player1Rect = new Rectangle(500,500,player1Text.Width,player1Text.Height);
             player2Text = Content.Load<Texture2D>("Texutres/2");
             player2Rect = new Rectangle(500, 500, player2Text.Width / 2, player2Text.Height / 2);
