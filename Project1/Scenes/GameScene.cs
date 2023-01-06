@@ -28,12 +28,9 @@ namespace Project1.Scenes
         private KeyboardState kb;
         private const int vitesse = 5;
         bool hasJumped;
-
         public GameScene(Game1 game) : base(game)
         {
             _myGame = game;
-
-
         }
         public override void LoadContent()
         {
