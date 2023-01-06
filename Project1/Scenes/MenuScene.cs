@@ -21,20 +21,24 @@ namespace Project1
         private Rectangle[] lesBoutons;
         private MouseState ms, oldMs;
         private Rectangle msRect;
+        private Texture2D background;
+        private Rectangle bgRect;
 
         public MenuScene(Game1 game) : base(game)
         {
             _myGame = game;
             lesBoutons = new Rectangle[3];
-            lesBoutons[0] = new Rectangle(75, 110, 640, 160);
-            lesBoutons[1] = new Rectangle(75, 320, 640, 160);
-            lesBoutons[2] = new Rectangle(75, 528, 640, 160);
+            lesBoutons[0] = new Rectangle(375, 110, 640, 160);
+            lesBoutons[1] = new Rectangle(375, 320, 640, 160);
+            lesBoutons[2] = new Rectangle(375, 528, 640, 160);
 
         }
 
         public override void LoadContent()
         {
             _textBoutons = Content.Load<Texture2D>($"Texutres/boutons");
+            background = Content.Load<Texture2D>("Texutres/bg");
+            bgRect = new Rectangle(0, 0, data.largeurEcran, data.longueurEcran);
             base.LoadContent();
         }
    
@@ -46,10 +50,9 @@ namespace Project1
             {
                 for (int i = 0; i < lesBoutons.Length; i++)
                 {
-                    // si le clic correspond à un des 3 boutons
                     if (lesBoutons[i].Contains(Mouse.GetState().X, Mouse.GetState().Y))
                     {
-                        // on change l'état défini dans Game1 en fonction du bouton cliqué
+
                         if (i == 0)
                             _myGame.Etat = Game1.Etats.Setting;
                         else if (i == 1)
@@ -67,7 +70,8 @@ namespace Project1
         {
             GraphicsDevice.Clear(Color.Black);
             _myGame.SpriteBatch.Begin();
-            _myGame.SpriteBatch.Draw(_textBoutons, new Vector2(0, 0), Color.White);
+            _myGame.SpriteBatch.Draw(background, bgRect, Color.White);
+            _myGame.SpriteBatch.Draw(_textBoutons, new Vector2(300, 0), Color.White);
             _myGame.SpriteBatch.End();
         }
     }

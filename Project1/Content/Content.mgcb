@@ -44,7 +44,7 @@
 /processorParam:TextureFormat=Color
 /build:Texutres/2.png
 
-#begin Texutres/bg.jpg
+#begin Texutres/bg.jpeg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -54,7 +54,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Texutres/bg.jpg
+/build:Texutres/bg.jpeg
 
 #begin Texutres/boutons.png
 /importer:TextureImporter

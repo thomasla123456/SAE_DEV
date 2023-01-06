@@ -61,12 +61,13 @@ namespace Project1.Core
             IsMouseVisible = true;
             _screenManager = new ScreenManager();
             Components.Add(_screenManager);
-            /*_graphics.ToggleFullScreen();*/
+            _graphics.ToggleFullScreen();
 
             Etat = Etats.Menu;
 
             _screenMenu = new MenuScene(this);
             _screenPlay = new GameScene(this);
+            _screenSetting = new SettingScene(this);
         }
 
         protected override void Initialize()
@@ -109,6 +110,10 @@ namespace Project1.Core
 
                 else if (this.Etat == Etats.play)
                     _screenManager.LoadScreen(_screenPlay, new FadeTransition(GraphicsDevice, Color.Black));
+
+
+                else if (this.Etat == Etats.Setting)
+                    _screenManager.LoadScreen(_screenSetting, new FadeTransition(GraphicsDevice, Color.Black));
 
             }
 
