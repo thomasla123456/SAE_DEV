@@ -24,13 +24,6 @@ namespace Project1.Core
 
         private GameStateManager gsm;
 
-        private int largeurEcran = 900;
-        private int longueurEcran = 1440;
-
-        private Vector2 textPos;
-        private SpriteFont textFont;
-        private const string textMsg ="Pessi game";
-
         private const int taillePerso = 100;
         private KeyboardState kb;
         private const int vitesse = 5;
@@ -93,8 +86,7 @@ namespace Project1.Core
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _screenManager.LoadScreen(_screenMenu, new FadeTransition(GraphicsDevice, Color.Black));
             gsm.LoadContent(Content);
-            textFont = Content.Load<SpriteFont>("Fonts/TextFont");
-            textPos = new Vector2(0,10);
+ 
 
 
 
@@ -130,13 +122,7 @@ namespace Project1.Core
 
             kb = Keyboard.GetState();
 
-           
 
-
-
-            if (textPos.X > longueurEcran)
-                textPos.X = 0;
-            textPos.X += vitesse;
 
             if (data.Exit)
                 Exit(); 
@@ -146,11 +132,9 @@ namespace Project1.Core
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
             _spriteBatch.Begin();
             gsm.Draw(_spriteBatch);
-          
-            _spriteBatch.DrawString(textFont, textMsg, textPos, Color.Black);
             _spriteBatch.End();
 
             base.Draw(gameTime);
