@@ -82,6 +82,7 @@ namespace Project1.Core
 
             if (kb.IsKeyDown(Keys.D))
                 player1Rect.X += vitesse;
+            
             else if (kb.IsKeyDown(Keys.Q))
                 player1Rect.X -= vitesse;
 
