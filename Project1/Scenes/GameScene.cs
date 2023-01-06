@@ -27,6 +27,7 @@ namespace Project1.Scenes
         private Rectangle player2Rect;
         private KeyboardState kb;
         private const int vitesse = 5;
+        bool hasJumped;
 
         public GameScene(Game1 game) : base(game)
         {
