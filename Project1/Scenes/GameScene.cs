@@ -96,6 +96,11 @@ namespace Project1.Scenes
                 player2Rect.Y = data.largeurEcran;
 
 
+            if (player1Rect.Y >= 708)
+                player1Rect.Y = 708;
+            if (player2Rect.Y >= 670)
+                player2Rect.Y = 670;
+
 
         }
         public override void Draw(GameTime gameTime)
