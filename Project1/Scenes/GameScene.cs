@@ -18,8 +18,8 @@ namespace Project1.Scenes
         private Rectangle bgRect;
         internal override void LoadContent(ContentManager Content)
         {
-            background = Content.Load<Texture2D>("Texutres/bg");
-            bgRect = new Rectangle(0, 0, _graphics.GraphicsDevice.Viewport.Width, _graphics.GraphicsDevice.Viewport.Height);
+            background = Content.Load<Texture2D>("Texutres/2");
+            bgRect = new Rectangle(0, 0, data.largeurEcran, data.longueurEcran);
         }
 
 
