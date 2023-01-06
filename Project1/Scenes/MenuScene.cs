@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended.Screens;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended.TextureAtlases;
 using Project1.Core;
@@ -11,51 +12,63 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project1.Scenes
+namespace Project1
 {
-    internal class MenuScene : Component
+    public class MenuScene : GameScreen
     {
-        private const int MAX_BTNS = 3;
-        private Texture2D[] btns = new Texture2D[MAX_BTNS];
-        private Rectangle[] btnRect = new Rectangle[MAX_BTNS];
+        private Game1 _myGame;
+        private Texture2D _textBoutons;
+        private Rectangle[] lesBoutons;
         private MouseState ms, oldMs;
         private Rectangle msRect;
-        internal override void LoadContent(ContentManager Content)
+
+        public MenuScene(Game1 game) : base(game)
         {
-            const int INCREMENT = 175;
-            for (int i = 0; i < btns.Length; i++)
-            {
-                btns[i] = Content.Load<Texture2D>($"Texutres/btn{i}");
-                btnRect[i] = new Rectangle(580, 0 +( INCREMENT*i), btns[i].Width/2, btns[i].Height/2);
-            }
-             
+            _myGame = game;
+            lesBoutons = new Rectangle[3];
+            lesBoutons[0] = new Rectangle(75, 110, 640, 160);
+            lesBoutons[1] = new Rectangle(75, 320, 640, 160);
+            lesBoutons[2] = new Rectangle(75, 528, 640, 160);
+
         }
 
-        internal override void Update(GameTime gameTime)
+        public override void LoadContent()
         {
-            oldMs = ms;
-            ms = Mouse.GetState(); 
-            msRect = new Rectangle (ms.X,ms.Y,1,1);
-
-            if (ms.LeftButton == ButtonState.Pressed && msRect.Intersects(btnRect[0]))
-                data.CurrentState = data.Scenes.Game;
-            else if (ms.LeftButton == ButtonState.Pressed && msRect.Intersects(btnRect[1]))
-                data.CurrentState = data.Scenes.Setting;
-            else if (ms.LeftButton == ButtonState.Pressed && msRect.Intersects(btnRect[2]))
-                data.Exit = true;
-
+            _textBoutons = Content.Load<Texture2D>($"Texutres/boutons");
+            base.LoadContent();
         }
-        internal override void Draw(SpriteBatch spriteBatch)
-        {
-            for (int i = 0; i < btns.Length; i++)
-            {
-                spriteBatch.Draw(btns[i], btnRect[i], Color.White);
+   
 
-                if (msRect.Intersects(btnRect[i]))
+        public override void Update(GameTime gameTime)
+        {
+            MouseState _mouseState = Mouse.GetState();
+            if (_mouseState.LeftButton == ButtonState.Pressed)
+            {
+                for (int i = 0; i < lesBoutons.Length; i++)
                 {
-                    spriteBatch.Draw(btns[i], btnRect[i], Color.Gray);
+                    // si le clic correspond à un des 3 boutons
+                    if (lesBoutons[i].Contains(Mouse.GetState().X, Mouse.GetState().Y))
+                    {
+                        // on change l'état défini dans Game1 en fonction du bouton cliqué
+                        if (i == 0)
+                            _myGame.Etat = Game1.Etats.Setting;
+                        else if (i == 1)
+                            _myGame.Etat = Game1.Etats.play;
+                        else
+                            _myGame.Etat = Game1.Etats.Exit;
+                        break;
+                    }
+
                 }
             }
+
+        }
+        public override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.Black);
+            _myGame.SpriteBatch.Begin();
+            _myGame.SpriteBatch.Draw(_textBoutons, new Vector2(0, 0), Color.White);
+            _myGame.SpriteBatch.End();
         }
     }
 }

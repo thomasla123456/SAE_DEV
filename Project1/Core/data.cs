@@ -12,7 +12,6 @@ namespace Project1.Core
         public static int longueurEcran { get; set; } = 900;
         public static bool Exit { get; set; } = false;
 
-        public enum Scenes { Menu, Game, Setting }
-        public static Scenes CurrentState { get; set; } = Scenes.Menu;
+
     }
 }

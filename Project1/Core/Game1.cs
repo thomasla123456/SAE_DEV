@@ -1,9 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended.Screens;
+using MonoGame.Extended.Screens.Transitions;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended.TextureAtlases;
 using Project1.Core.Managers;
+using Project1.Scenes;
+using System;
 
 namespace Project1.Core
 {
@@ -11,8 +15,13 @@ namespace Project1.Core
     {
         private static GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Texture2D background;
-        private Rectangle bgRect;
+        private readonly ScreenManager _screenManager;
+        public enum Etats { Menu, Setting, play, Exit };
+        private Etats etat;
+        private MenuScene _screenMenu;
+        private GameScene _screenPlay;
+        private SettingScene _screenSetting;
+
         private GameStateManager gsm;
 
         private int largeurEcran = 900;
@@ -23,19 +32,48 @@ namespace Project1.Core
         private const string textMsg ="Pessi game";
 
         private const int taillePerso = 100;
-        private Texture2D player1Text;
-        private Rectangle player1Rect;
-        private Texture2D player2Text;
-        private Rectangle player2Rect;
         private KeyboardState kb;
         private const int vitesse = 5;
+
+        public SpriteBatch SpriteBatch
+        {
+            get
+            {
+                return this._spriteBatch;
+            }
+
+            set
+            {
+                this._spriteBatch = value;
+            }
+        }
+
+        public Etats Etat
+        {
+            get
+            {
+                return this.etat;
+            }
+
+            set
+            {
+                this.etat = value;
+            }
+        }
 
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            _screenManager = new ScreenManager();
+            Components.Add(_screenManager);
             /*_graphics.ToggleFullScreen();*/
+
+            Etat = Etats.Menu;
+
+            _screenMenu = new MenuScene(this);
+            _screenPlay = new GameScene(this);
         }
 
         protected override void Initialize()
@@ -53,15 +91,11 @@ namespace Project1.Core
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            _screenManager.LoadScreen(_screenMenu, new FadeTransition(GraphicsDevice, Color.Black));
             gsm.LoadContent(Content);
-            background = Content.Load<Texture2D>("Texutres/bg");
             textFont = Content.Load<SpriteFont>("Fonts/TextFont");
-            bgRect = new Rectangle(0, 0, _graphics.GraphicsDevice.Viewport.Width , _graphics.GraphicsDevice.Viewport.Height);
             textPos = new Vector2(0,10);
-            player1Text = Content.Load<Texture2D>("Texutres/perso");
-            player1Rect = new Rectangle(500,500,player1Text.Width,player1Text.Height);
-            player2Text = Content.Load<Texture2D>("Texutres/2");
-            player2Rect = new Rectangle(500, 500, player2Text.Width / 2, player2Text.Height / 2);
+
 
 
         }
@@ -73,54 +107,30 @@ namespace Project1.Core
 
             gsm.Update(gameTime);
 
-           kb = Keyboard.GetState();
 
-            if (kb.IsKeyDown(Keys.Z))
-                player1Rect.Y -= vitesse;
-            else if (kb.IsKeyDown(Keys.S))
-                player1Rect.Y += vitesse;
+            MouseState _mouseState = Mouse.GetState();
+            if (_mouseState.LeftButton == ButtonState.Pressed)
+            {
+               
+                if (this.Etat == Etats.Exit)
+                    Exit();
 
-            if (kb.IsKeyDown(Keys.D))
-                player1Rect.X += vitesse;
-            
-            else if (kb.IsKeyDown(Keys.Q))
-                player1Rect.X -= vitesse;
+                else if (this.Etat == Etats.play)
+                    _screenManager.LoadScreen(_screenPlay, new FadeTransition(GraphicsDevice, Color.Black));
 
-            if (player1Rect.X > longueurEcran)
-                player1Rect.X =  0;
+            }
 
-            if (player1Rect.X < 0)
-                player1Rect.X = longueurEcran;
-
-            if (player1Rect.Y > largeurEcran)
-                player1Rect.Y = 0;
-
-            if (player1Rect.Y < 0)
-                player1Rect.Y = largeurEcran;
+            if (Keyboard.GetState().IsKeyDown(Keys.Back))
+            {
+                if (this.Etat == Etats.Menu)
+                    _screenManager.LoadScreen(_screenMenu, new FadeTransition(GraphicsDevice, Color.Black));
+            }
 
 
 
-            if (kb.IsKeyDown(Keys.Up))
-                player2Rect.Y -= vitesse;
-            else if (kb.IsKeyDown(Keys.Down))
-                player2Rect.Y += vitesse;
+            kb = Keyboard.GetState();
 
-            if (kb.IsKeyDown(Keys.Right))
-                player2Rect.X += vitesse;
-            else if (kb.IsKeyDown(Keys.Left))
-                player2Rect.X -= vitesse;
-
-            if (player2Rect.X > longueurEcran)
-                player2Rect.X = 0;
-
-            if (player2Rect.X < 0)
-                player2Rect.X = longueurEcran;
-
-            if (player2Rect.Y > largeurEcran)
-                player2Rect.Y = 0;
-
-            if (player2Rect.Y < 0)
-                player2Rect.Y = largeurEcran;
+           
 
 
 
@@ -138,10 +148,8 @@ namespace Project1.Core
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
-            _spriteBatch.Draw(background, bgRect, Color.White);
             gsm.Draw(_spriteBatch);
-            _spriteBatch.Draw(player2Text, player2Rect, Color.White);
-            _spriteBatch.Draw(player1Text,player1Rect,Color.White);
+          
             _spriteBatch.DrawString(textFont, textMsg, textPos, Color.Black);
             _spriteBatch.End();
 
