@@ -23,11 +23,10 @@ namespace Project1.Scenes
         private const int taillePerso = 100;
         private Texture2D player1Text;
         private Rectangle player1Rect;
-        private Texture2D player2Text;
-        private Rectangle player2Rect;
         private KeyboardState kb;
         private const int vitesse = 5;
-        bool hasJumped;
+        private Texture2D obstacle;
+        private Rectangle obstacleRect;
         public GameScene(Game1 game) : base(game)
         {
             _myGame = game;
@@ -38,8 +37,8 @@ namespace Project1.Scenes
             bgRect = new Rectangle(0, 0, data.largeurEcran, data.longueurEcran);
             player1Text = Content.Load<Texture2D>("Texutres/perso");
             player1Rect = new Rectangle(500, 500, player1Text.Width, player1Text.Height);
-            player2Text = Content.Load<Texture2D>("Texutres/2");
-            player2Rect = new Rectangle(500, 500, player2Text.Width / 2, player2Text.Height / 2);
+            obstacle = Content.Load<Texture2D>("Texutres/block");
+            obstacleRect = new Rectangle(800, 500, 100, 100);
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
@@ -47,66 +46,43 @@ namespace Project1.Scenes
             kb = Keyboard.GetState();
 
             if (kb.IsKeyDown(Keys.Z))
+            {
                 player1Rect.Y -= vitesse;
+            }
             else if (kb.IsKeyDown(Keys.S))
                 player1Rect.Y += vitesse;
 
             if (kb.IsKeyDown(Keys.D))
-                player1Rect.X += vitesse;
+            {
+                bgRect.X -= vitesse;
+                obstacleRect.X -= vitesse;
+            }
 
             else if (kb.IsKeyDown(Keys.Q))
-                player1Rect.X -= vitesse;
+            {
+                bgRect.X += vitesse;
+                obstacleRect.X += vitesse;
+            }
 
-            if (player1Rect.X > data.longueurEcran)
-                player1Rect.X = 0;
 
-            if (player1Rect.X < 0)
-                player1Rect.X = data.longueurEcran;
-
-            if (player1Rect.Y > data.largeurEcran)
-                player1Rect.Y = 0;
+            if (player1Rect.Y >= 1440)
+                player1Rect.Y = 1440;
 
             if (player1Rect.Y < 0)
-                player1Rect.Y = data.largeurEcran;
+                player1Rect.Y = 0;
 
+           /* if (player1Rect.X+taillePerso >= obstacleRect.X)
+                player1Rect.X = obstacleRect.X-taillePerso;
 
-
-            if (kb.IsKeyDown(Keys.Up))
-                player2Rect.Y -= vitesse;
-            else if (kb.IsKeyDown(Keys.Down))
-                player2Rect.Y += vitesse;
-
-            if (kb.IsKeyDown(Keys.Right))
-                player2Rect.X += vitesse;
-            else if (kb.IsKeyDown(Keys.Left))
-                player2Rect.X -= vitesse;
-
-            if (player2Rect.X > data.longueurEcran)
-                player2Rect.X = 0;
-
-            if (player2Rect.X < 0)
-                player2Rect.X = data.longueurEcran;
-
-            if (player2Rect.Y > data.largeurEcran)
-                player2Rect.Y = 0;
-
-            if (player2Rect.Y < 0)
-                player2Rect.Y = data.largeurEcran;
-
-
-            if (player1Rect.Y >= 708)
-                player1Rect.Y = 708;
-            if (player2Rect.Y >= 670)
-                player2Rect.Y = 670;
-
-
+            else if (player1Rect.X + taillePerso >= obstacleRect.X && player1Rect.Y + taillePerso <= obstacleRect.Y)
+                player1Rect.X += player1Rect.X+100;*/
         }
         public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Yellow);
             _myGame.SpriteBatch.Begin();
             _myGame.SpriteBatch.Draw(background, bgRect, Color.White);
-            _myGame.SpriteBatch.Draw(player2Text, player2Rect, Color.White);
+            _myGame.SpriteBatch.Draw(obstacle,obstacleRect, Color.White);
             _myGame.SpriteBatch.Draw(player1Text, player1Rect, Color.White);
             _myGame.SpriteBatch.End();
 

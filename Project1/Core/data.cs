@@ -8,7 +8,7 @@ namespace Project1.Core
 {
     public static class data
     {
-        public static int largeurEcran { get; set; } = 2500;
+        public static int largeurEcran { get; set; } = 8000;
         public static int longueurEcran { get; set; } = 900;
         public static bool Exit { get; set; } = false;
 
