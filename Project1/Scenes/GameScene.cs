@@ -35,7 +35,7 @@ namespace Project1.Scenes
         private Sprite _block;
         private Vector2 _blockPos;
         private SoundEffect music;
-
+        private int Gravite = 5;
         public GameScene(Game1 game) : base(game)
         {
             _myGame = game;
@@ -45,9 +45,8 @@ namespace Project1.Scenes
         {
             background = Content.Load<Texture2D>("Texutres/background");
             bgRect = new Rectangle(0, 0, data.largeurEcran, data.longueurEcran);
-            music = Content.Load<SoundEffect>("music");
+            /*music = Content.Load<SoundEffect>("music");*/
             
-            /*_block = Content.Load<Sprite>("Texutres/2");*/
             _blockPos = new Vector2 (500, 500);
 
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("perso.sf", new JsonContentLoader());
@@ -70,6 +69,8 @@ namespace Project1.Scenes
         {
             kb = Keyboard.GetState();
 
+            _persoPosition.Y = _persoPosition.Y + Gravite;
+
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
             float walkSpeed = deltaSeconds * _persoVitesse;
             var keyboardState = Keyboard.GetState();
@@ -86,7 +87,23 @@ namespace Project1.Scenes
                 animation = "walkEast";
                 _persoPosition.X += walkSpeed;
             }
+            if (keyboardState.IsKeyDown(Keys.D) && (keyboardState.IsKeyDown(Keys.Space)  || keyboardState.IsKeyDown(Keys.Right) && (keyboardState.IsKeyDown(Keys.Space))))
+            {
+                animation = "jumpEast";
+                _persoPosition.X += walkSpeed;
+                _persoPosition.Y = _persoPosition.Y - 6f;
+            }
+            if (keyboardState.IsKeyDown(Keys.Q) && (keyboardState.IsKeyDown(Keys.Space) || keyboardState.IsKeyDown(Keys.Left) && (keyboardState.IsKeyDown(Keys.Space))))
+            {
+                animation = "jumpWest";
+                _persoPosition.X -= walkSpeed;
+                _persoPosition.Y = _persoPosition.Y - 6f;
+            }
 
+            if (keyboardState.IsKeyDown(Keys.Space))
+            {
+                _persoPosition.Y = _persoPosition.Y - 12f;
+            }
             if (_persoPosition.Y > 660)
                 _persoPosition.Y = 660;
 
@@ -102,10 +119,6 @@ namespace Project1.Scenes
             _myGame.SpriteBatch.Draw(background, bgRect, Color.White);
             _myGame.SpriteBatch.Draw(_perso, _persoPosition);
             _myGame.SpriteBatch.End();
-
-
         }
-
-
     }
 }
