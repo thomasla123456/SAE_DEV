@@ -13,6 +13,7 @@ using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Content;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace Project1.Scenes
 {
@@ -36,6 +37,8 @@ namespace Project1.Scenes
         private Vector2 _blockPos;
         private SoundEffect music;
         private int Gravite = 5;
+        private Song song;
+        bool SAUT;
         public GameScene(Game1 game) : base(game)
         {
             _myGame = game;
@@ -45,8 +48,11 @@ namespace Project1.Scenes
         {
             background = Content.Load<Texture2D>("Texutres/background");
             bgRect = new Rectangle(0, 0, data.largeurEcran, data.longueurEcran);
-            /*music = Content.Load<SoundEffect>("music");*/
+
+            /*Song song = Content.Load<Song>("music");
+            MediaPlayer.Play(song);*/
             
+
             _blockPos = new Vector2 (500, 500);
 
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("perso.sf", new JsonContentLoader());
@@ -68,8 +74,10 @@ namespace Project1.Scenes
         public override void Update(GameTime gameTime)
         {
             kb = Keyboard.GetState();
-
+           
             _persoPosition.Y = _persoPosition.Y + Gravite;
+
+            SAUT = false;
 
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
             float walkSpeed = deltaSeconds * _persoVitesse;
@@ -80,30 +88,41 @@ namespace Project1.Scenes
             {
                 animation = "walkWest";
                 _persoPosition.X -= walkSpeed;
+                SAUT = true;
             }
 
             if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
             {
                 animation = "walkEast";
                 _persoPosition.X += walkSpeed;
+                SAUT = true;
             }
             if (keyboardState.IsKeyDown(Keys.D) && (keyboardState.IsKeyDown(Keys.Space)  || keyboardState.IsKeyDown(Keys.Right) && (keyboardState.IsKeyDown(Keys.Space))))
             {
                 animation = "jumpEast";
                 _persoPosition.X += walkSpeed;
                 _persoPosition.Y = _persoPosition.Y - 6f;
+                SAUT = true;
             }
             if (keyboardState.IsKeyDown(Keys.Q) && (keyboardState.IsKeyDown(Keys.Space) || keyboardState.IsKeyDown(Keys.Left) && (keyboardState.IsKeyDown(Keys.Space))))
             {
                 animation = "jumpWest";
                 _persoPosition.X -= walkSpeed;
                 _persoPosition.Y = _persoPosition.Y - 6f;
+                SAUT = true;
             }
 
             if (keyboardState.IsKeyDown(Keys.Space))
             {
                 _persoPosition.Y = _persoPosition.Y - 12f;
+                SAUT = true;
             }
+
+            if (SAUT == true)
+            {
+                _persoPosition.Y = 0f;
+            }
+
             if (_persoPosition.Y > 660)
                 _persoPosition.Y = 660;
 
