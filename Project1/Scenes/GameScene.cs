@@ -26,13 +26,13 @@ namespace Project1.Scenes
         private const int taillePerso = 100;
         private KeyboardState kb;
         private int vitesse = 5;
-        private Texture2D obstacle;
-        private Rectangle obstacleRect;
 
 
         private AnimatedSprite _perso;
         private Vector2 _persoPosition;
         private int _persoVitesse;
+        private Sprite _block;
+        private Vector2 _blockPos;
 
         public GameScene(Game1 game) : base(game)
         {
@@ -43,8 +43,9 @@ namespace Project1.Scenes
         {
             background = Content.Load<Texture2D>("Texutres/background");
             bgRect = new Rectangle(0, 0, data.largeurEcran, data.longueurEcran);
-            obstacle = Content.Load<Texture2D>("Texutres/block");
-            obstacleRect = new Rectangle(1000, 600, 100, 100);
+            
+            _block = Content.Load<Sprite>("Texutres/block");
+            _blockPos = new Vector2 (500, 500);
 
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("perso.sf", new JsonContentLoader());
             var sprite = new AnimatedSprite(spriteSheet);
@@ -83,6 +84,7 @@ namespace Project1.Scenes
                 _persoPosition.X += walkSpeed;
             }
 
+
             _perso.Play(animation);
             _perso.Update(deltaSeconds);
 
@@ -94,7 +96,7 @@ namespace Project1.Scenes
             _myGame.SpriteBatch.Begin();
             _myGame.SpriteBatch.Draw(background, bgRect, Color.White);
             _myGame.SpriteBatch.Draw(_perso, _persoPosition);
-            _myGame.SpriteBatch.Draw(obstacle,obstacleRect, Color.White);
+            _myGame.SpriteBatch.Draw(_block, _blockPos);
             _myGame.SpriteBatch.End();
 
 
