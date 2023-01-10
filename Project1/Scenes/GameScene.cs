@@ -12,6 +12,7 @@ using MonoGame.Extended.Screens;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Content;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Project1.Scenes
 {
@@ -33,6 +34,7 @@ namespace Project1.Scenes
         private int _persoVitesse;
         private Sprite _block;
         private Vector2 _blockPos;
+        private SoundEffect music;
 
         public GameScene(Game1 game) : base(game)
         {
@@ -43,8 +45,9 @@ namespace Project1.Scenes
         {
             background = Content.Load<Texture2D>("Texutres/background");
             bgRect = new Rectangle(0, 0, data.largeurEcran, data.longueurEcran);
+            music = Content.Load<SoundEffect>("music");
             
-            _block = Content.Load<Sprite>("Texutres/block");
+            /*_block = Content.Load<Sprite>("Texutres/2");*/
             _blockPos = new Vector2 (500, 500);
 
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("perso.sf", new JsonContentLoader());
@@ -84,6 +87,8 @@ namespace Project1.Scenes
                 _persoPosition.X += walkSpeed;
             }
 
+            if (_persoPosition.Y > 660)
+                _persoPosition.Y = 660;
 
             _perso.Play(animation);
             _perso.Update(deltaSeconds);
@@ -96,7 +101,6 @@ namespace Project1.Scenes
             _myGame.SpriteBatch.Begin();
             _myGame.SpriteBatch.Draw(background, bgRect, Color.White);
             _myGame.SpriteBatch.Draw(_perso, _persoPosition);
-            _myGame.SpriteBatch.Draw(_block, _blockPos);
             _myGame.SpriteBatch.End();
 
 
