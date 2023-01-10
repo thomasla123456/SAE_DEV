@@ -66,26 +66,26 @@ namespace Project1.Scenes
         {
             kb = Keyboard.GetState();
 
-                float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
-                float walkSpeed = deltaSeconds * _persoVitesse;
-                var keyboardState = Keyboard.GetState();
-                var animation = "idleEast";
+            float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            float walkSpeed = deltaSeconds * _persoVitesse;
+            var keyboardState = Keyboard.GetState();
+            var animation = "idleEast";
 
-                if (keyboardState.IsKeyDown(Keys.Q) || keyboardState.IsKeyDown(Keys.Left))
-                { 
-                    animation = "walkWest";
-                    _persoPosition.X -= walkSpeed;
-                }
+            if (keyboardState.IsKeyDown(Keys.Q) || keyboardState.IsKeyDown(Keys.Left))
+            {
+                animation = "walkWest";
+                _persoPosition.X -= walkSpeed;
+            }
 
-                if (keyboardState.IsKeyDown(Keys.D)  || keyboardState.IsKeyDown(Keys.Right))
-                {
-                    animation = "walkEast";
-                    _persoPosition.X += walkSpeed;
-                }
+            if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
+            {
+                animation = "walkEast";
+                _persoPosition.X += walkSpeed;
+            }
 
-                _perso.Play(animation);
-                _perso.Update(deltaSeconds);
-             
+            _perso.Play(animation);
+            _perso.Update(deltaSeconds);
+
 
         }
         public override void Draw(GameTime gameTime)
@@ -99,5 +99,7 @@ namespace Project1.Scenes
 
 
         }
+
+
     }
 }
