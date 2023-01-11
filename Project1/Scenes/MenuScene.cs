@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended.TextureAtlases;
@@ -19,8 +20,6 @@ namespace Project1
         private Game1 _myGame;
         private Texture2D _textBoutons;
         private Rectangle[] lesBoutons;
-        private MouseState ms, oldMs;
-        private Rectangle msRect;
         private Texture2D background;
         private Rectangle bgRect;
 
@@ -39,6 +38,10 @@ namespace Project1
             _textBoutons = Content.Load<Texture2D>($"Texutres/boutons");
             background = Content.Load<Texture2D>("Texutres/background");
             bgRect = new Rectangle(0, 0, data.largeurEcran, data.longueurEcran);
+
+            Song song = Content.Load<Song>("musique");
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(song);
             base.LoadContent();
         }
    

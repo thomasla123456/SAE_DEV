@@ -19,6 +19,9 @@ namespace Project1.Scenes
         private Texture2D background;
         private Rectangle bgRect;
 
+        private Texture2D controle;
+        private Rectangle controleRect;
+
 
         public SettingScene(Game1 game) : base(game)
         {
@@ -28,19 +31,26 @@ namespace Project1.Scenes
         }
         public override void LoadContent()
         {
-            background = Content.Load<Texture2D>("Texutres/bg");
+            background = Content.Load<Texture2D>("Texutres/background");
             bgRect = new Rectangle(0, 0, data.largeurEcran, data.longueurEcran);
+            controle = Content.Load<Texture2D>("Texutres/controle");
+            controleRect = new Rectangle(0, 0, 1640, 664);
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
         {
-            
+            /*var keyboardState = Keyboard.GetState();
+            if (keyboardState.IsKeyDown(Keys.H))
+            {
+                _myGame.Etat = Game1.Etats.Menu;
+            }*/
         }
         public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Yellow);
             _myGame.SpriteBatch.Begin();
-            /*_myGame.SpriteBatch.Draw(background, bgRect, Color.White);*/
+            _myGame.SpriteBatch.Draw(background, bgRect, Color.White);
+            _myGame.SpriteBatch.Draw(controle, controleRect, Color.White);    
             _myGame.SpriteBatch.End();
 
 

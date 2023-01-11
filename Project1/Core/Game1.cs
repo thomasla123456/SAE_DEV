@@ -16,7 +16,7 @@ namespace Project1.Core
         private static GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private readonly ScreenManager _screenManager;
-        public enum Etats { Menu, Setting, play, Exit };
+        public enum Etats { Menu, Setting, play, Exit, gameover };
         private Etats etat;
         private MenuScene _screenMenu;
         private GameScene _screenPlay;

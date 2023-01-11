@@ -25,6 +25,30 @@
 /processorParam:TextureFormat=Color
 /build:../../../../../../Desktop/block.png;Texutres/block.png
 
+#begin ../../../../../../Desktop/controle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../../../Desktop/controle.png;Texutres/controle.png
+
+#begin ../../../../../../Desktop/musique.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:../../../../../../Desktop/musique.mp3;musique.mp3
+
+#begin ../../../../../../Desktop/saut.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:../../../../../../Desktop/saut.mp3;saut.mp3
+
 #begin Fonts/TextFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

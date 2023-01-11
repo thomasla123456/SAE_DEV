@@ -14,6 +14,7 @@ using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Content;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
+using MonoGame.Extended.TextureAtlases;
 
 namespace Project1.Scenes
 {
@@ -34,12 +35,15 @@ namespace Project1.Scenes
         private Vector2 _persoPosition;
         private int _persoVitesse;
         private Rectangle _persoRect;
+
         private Texture2D _block;
         private Rectangle _blockRect;
-        private SoundEffect music;
+
+
         private int Gravite = 5;
-        private Song song;
         bool SAUT;
+
+
         public GameScene(Game1 game) : base(game)
         {
             _myGame = game;
@@ -50,10 +54,13 @@ namespace Project1.Scenes
             background = Content.Load<Texture2D>("Texutres/background");
             bgRect = new Rectangle(0, 0, data.largeurEcran, data.longueurEcran);
             _block = Content.Load<Texture2D>("Texutres/block");
-            _blockRect = new Rectangle(200, 400, 100, 100);          
+            _blockRect = new Rectangle(400, 500, 100, 100);
 
-            /*Song song = Content.Load<Song>("music");
-            MediaPlayer.Play(song);*/       
+
+            Song song = Content.Load<Song>("musique");
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(song);
+
 
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("perso.sf", new JsonContentLoader());
             var sprite = new AnimatedSprite(spriteSheet);
@@ -61,13 +68,17 @@ namespace Project1.Scenes
 
             sprite.Play("idleEast");
             _perso = sprite;
+
+            
+
             base.LoadContent();
         }
 
         public override void Initialize()
         {
-            _persoVitesse = 250;
-            _persoPosition = new Vector2(210, 630);
+            _persoVitesse = 0;
+            _persoPosition = new Vector2(410, 630);
+            _persoRect = new Rectangle((int)_persoPosition.X,(int)_persoPosition.Y, 50, 50);
             base.Initialize();
         }
 
@@ -76,6 +87,9 @@ namespace Project1.Scenes
             kb = Keyboard.GetState();          
             _persoPosition.Y = _persoPosition.Y + Gravite;
             SAUT = false;
+
+            _persoRect.X = (int)_persoPosition.X;
+            _persoRect.Y = (int)_persoPosition.Y;
 
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
             float walkSpeed = deltaSeconds * _persoVitesse;
@@ -86,12 +100,16 @@ namespace Project1.Scenes
             {
                 animation = "walkWest";
                 _persoPosition.X -= walkSpeed;
+                bgRect.X = bgRect.X + 5;
+                _blockRect.X = _blockRect.X + 5;
                 SAUT = true;
             }
 
             if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
             {
                 animation = "walkEast";
+                bgRect.X = bgRect.X-5;
+                _blockRect.X = _blockRect.X - 5;
                 _persoPosition.X += walkSpeed;
                 SAUT = true;
             }
@@ -114,14 +132,21 @@ namespace Project1.Scenes
             {
                 _persoPosition.Y = _persoPosition.Y - 12f;
                 SAUT = true;
+                _myGame.Etat = Game1.Etats.gameover;
             }
 
 
-
-            if (_blockRect.Intersects(_persoRect))
+            if ((_persoPosition.X < _blockRect.X + _blockRect.Width) &&
+            (_persoPosition.X  > _blockRect.X) &&
+            (_persoPosition.Y < _blockRect.Y + _block.Height) &&
+            (_persoPosition.Y + _persoRect.Height > _blockRect.Y))
             {
-                _persoRect.X = 0;
+                _persoPosition.X = 0;
+              
             }
+         
+
+
 
             if (_persoPosition.Y > 630)
                 _persoPosition.Y = 630;
@@ -138,7 +163,8 @@ namespace Project1.Scenes
             _myGame.SpriteBatch.Draw(background, bgRect, Color.White);
             _myGame.SpriteBatch.Draw(_perso, _persoPosition);
             _myGame.SpriteBatch.Draw(_block, _blockRect, Color.White);
-            _myGame.SpriteBatch.End();
+            _myGame.SpriteBatch.End(); 
         }
+
     }
 }
