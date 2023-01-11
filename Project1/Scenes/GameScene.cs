@@ -33,8 +33,9 @@ namespace Project1.Scenes
         private AnimatedSprite _perso;
         private Vector2 _persoPosition;
         private int _persoVitesse;
-        private Sprite _block;
-        private Vector2 _blockPos;
+        private Rectangle _persoRect;
+        private Texture2D _block;
+        private Rectangle _blockPos;
         private SoundEffect music;
         private int Gravite = 5;
         private Song song;
@@ -48,35 +49,32 @@ namespace Project1.Scenes
         {
             background = Content.Load<Texture2D>("Texutres/background");
             bgRect = new Rectangle(0, 0, data.largeurEcran, data.longueurEcran);
+            _block = Content.Load<Texture2D>("Texutres/block");
+            _blockPos = new Rectangle(200, 200, 50, 50);
 
             /*Song song = Content.Load<Song>("music");
-            MediaPlayer.Play(song);*/
-            
-
-            _blockPos = new Vector2 (500, 500);
+            MediaPlayer.Play(song);*/       
 
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("perso.sf", new JsonContentLoader());
             var sprite = new AnimatedSprite(spriteSheet);
+            _persoRect = new Rectangle(224, 226, 100, 100);
 
             sprite.Play("idleEast");
             _perso = sprite;
-
             base.LoadContent();
         }
 
         public override void Initialize()
         {
             _persoVitesse = 100;
-            _persoPosition = new Vector2(200, 660);
+            _persoPosition = new Vector2(210, 630);
             base.Initialize();
         }
 
         public override void Update(GameTime gameTime)
         {
-            kb = Keyboard.GetState();
-           
+            kb = Keyboard.GetState();          
             _persoPosition.Y = _persoPosition.Y + Gravite;
-
             SAUT = false;
 
             float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -118,13 +116,17 @@ namespace Project1.Scenes
                 SAUT = true;
             }
 
-            if (SAUT == true)
+
+
+            if (_blockPos.Intersects(_persoRect))
             {
-                _persoPosition.Y = 0f;
+                _persoPosition.X = 0;
+
+
             }
 
-            if (_persoPosition.Y > 660)
-                _persoPosition.Y = 660;
+            if (_persoPosition.Y > 630)
+                _persoPosition.Y = 630;
 
             _perso.Play(animation);
             _perso.Update(deltaSeconds);
@@ -137,6 +139,7 @@ namespace Project1.Scenes
             _myGame.SpriteBatch.Begin();
             _myGame.SpriteBatch.Draw(background, bgRect, Color.White);
             _myGame.SpriteBatch.Draw(_perso, _persoPosition);
+            _myGame.SpriteBatch.Draw(_block, _blockPos, Color.White);
             _myGame.SpriteBatch.End();
         }
     }
