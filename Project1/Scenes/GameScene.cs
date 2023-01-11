@@ -35,7 +35,7 @@ namespace Project1.Scenes
         private int _persoVitesse;
         private Rectangle _persoRect;
         private Texture2D _block;
-        private Rectangle _blockPos;
+        private Rectangle _blockRect;
         private SoundEffect music;
         private int Gravite = 5;
         private Song song;
@@ -50,14 +50,14 @@ namespace Project1.Scenes
             background = Content.Load<Texture2D>("Texutres/background");
             bgRect = new Rectangle(0, 0, data.largeurEcran, data.longueurEcran);
             _block = Content.Load<Texture2D>("Texutres/block");
-            _blockPos = new Rectangle(200, 200, 50, 50);
+            _blockRect = new Rectangle(200, 400, 100, 100);          
 
             /*Song song = Content.Load<Song>("music");
             MediaPlayer.Play(song);*/       
 
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("perso.sf", new JsonContentLoader());
             var sprite = new AnimatedSprite(spriteSheet);
-            _persoRect = new Rectangle(224, 226, 100, 100);
+            
 
             sprite.Play("idleEast");
             _perso = sprite;
@@ -66,7 +66,7 @@ namespace Project1.Scenes
 
         public override void Initialize()
         {
-            _persoVitesse = 100;
+            _persoVitesse = 250;
             _persoPosition = new Vector2(210, 630);
             base.Initialize();
         }
@@ -118,11 +118,9 @@ namespace Project1.Scenes
 
 
 
-            if (_blockPos.Intersects(_persoRect))
+            if (_blockRect.Intersects(_persoRect))
             {
-                _persoPosition.X = 0;
-
-
+                _persoRect.X = 0;
             }
 
             if (_persoPosition.Y > 630)
@@ -139,7 +137,7 @@ namespace Project1.Scenes
             _myGame.SpriteBatch.Begin();
             _myGame.SpriteBatch.Draw(background, bgRect, Color.White);
             _myGame.SpriteBatch.Draw(_perso, _persoPosition);
-            _myGame.SpriteBatch.Draw(_block, _blockPos, Color.White);
+            _myGame.SpriteBatch.Draw(_block, _blockRect, Color.White);
             _myGame.SpriteBatch.End();
         }
     }
