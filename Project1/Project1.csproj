@@ -11,11 +11,13 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Content\pas.wav" />
     <None Remove="Content\saut.mp3" />
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\pas.wav" />
     <Content Include="Content\saut.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

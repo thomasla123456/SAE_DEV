@@ -15,6 +15,7 @@ using MonoGame.Extended.Content;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.TextureAtlases;
+using System.IO;
 
 namespace Project1.Scenes
 {
@@ -52,7 +53,7 @@ namespace Project1.Scenes
         private int Gravite = 5;
         bool SAUT;
         private SpriteFont text;
- 
+        private SoundEffect pas;
 
         public GameScene(Game1 game) : base(game)
         {
@@ -68,6 +69,8 @@ namespace Project1.Scenes
             _blockRect = new Rectangle(600, 500, 50, 50);
             _panneau = Content.Load<Texture2D>("Texutres/panneau");
             _panneauRect = new Rectangle(-100, 560, 267/2, 279/2);
+
+             /*pas = Content.Load<SoundEffect>("pas");  METTRE LE SON EN MP3 PARSKE LA SA BUG*/ 
 
 
             SpriteSheet porteSheet = Content.Load<SpriteSheet>("door.sf", new JsonContentLoader());
@@ -134,6 +137,8 @@ namespace Project1.Scenes
                 SAUT = true;
                 _portePos.X += 5;
                 _panneauRect.X = _panneauRect.X+5;
+                
+                /*pas.Play();*/
 
             }
 
@@ -146,6 +151,7 @@ namespace Project1.Scenes
                 SAUT = true;
                 _portePos.X -= 5;
                 _panneauRect.X = _panneauRect.X - 5;
+                /*pas.Play();*/
             }
             if (keyboardState.IsKeyDown(Keys.D) && (keyboardState.IsKeyDown(Keys.Space)  || keyboardState.IsKeyDown(Keys.Right) && (keyboardState.IsKeyDown(Keys.Space))))
             {

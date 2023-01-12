@@ -16,13 +16,15 @@ namespace Project1.Core
         private static GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private readonly ScreenManager _screenManager;
-        public enum Etats { Menu, Setting, play, Exit, gameover, win };
+        public enum Etats { Menu, Setting, play, Exit, gameover, win, GameScene2, end };
         private Etats etat;
         private MenuScene _screenMenu;
         private GameScene _screenPlay;
         private SettingScene _screenSetting;
         private gameover _gameOverScene;
         private win _win;
+        private GameScene2 _gameScene2;
+        private EndScene _endScene;
 
         private GameStateManager gsm;
 
@@ -72,6 +74,8 @@ namespace Project1.Core
             _screenSetting = new SettingScene(this);
             _gameOverScene = new gameover(this);
             _win = new win(this);
+            _gameScene2 = new GameScene2(this);
+            _endScene = new EndScene(this);
         }
 
         protected override void Initialize()
@@ -163,6 +167,14 @@ namespace Project1.Core
         public void LoadScreen2()
         {
             _screenManager.LoadScreen(new win(this), new FadeTransition(GraphicsDevice, Color.Black));
+        }
+        public void LoadScreen3()
+        {
+            _screenManager.LoadScreen(new GameScene2(this), new FadeTransition(GraphicsDevice, Color.Black));
+        }
+        public void LoadScreen4()
+        {
+            _screenManager.LoadScreen(new EndScene(this), new FadeTransition(GraphicsDevice, Color.Black));
         }
     }
 }

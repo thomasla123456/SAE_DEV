@@ -20,7 +20,7 @@ using Project1.Scenes;
 
 namespace Project1.Core
 {
-    public class Obstacle
+    public class Obstacle2
     {
         private Texture2D _block;
 
@@ -32,7 +32,7 @@ namespace Project1.Core
 
         int largeur = 500;
 
-        public Obstacle(Game1 game)
+        public Obstacle2(Game1 game)
         {
             _blockRect = new Rectangle[40];
             _lastPos = new int[40];
@@ -46,27 +46,27 @@ namespace Project1.Core
 
             _block = _block2;
 
-            for(int i = 0; i < 21; i++)
+            for (int i = 0; i < 35; i++)
             {
                 int rd = new Random().Next(430, 440);
-         
-             
-                    
-                    _blockRect[i] = new Rectangle(largeur , rd, 50, 50);
-                largeur += 300;
+
+
+
+                _blockRect[i] = new Rectangle(largeur, rd, 50, 50);
+                largeur += 180;
 
             }
-            
+
         }
         public void Update(Vector2 _persoPosition, Rectangle _persoRect)
         {
             var keyboardState = Keyboard.GetState();
 
-            
 
 
 
-            for (int i = 0; i < 21; i++)
+
+            for (int i = 0; i < 35; i++)
             {
                 if (keyboardState.IsKeyDown(Keys.Q) || keyboardState.IsKeyDown(Keys.Left))
                 {
@@ -81,27 +81,27 @@ namespace Project1.Core
 
                 }
 
-                    if (_blockRect[i].Y <= 430)
-                        _lastPos[i] = 1;
+                if (_blockRect[i].Y <= 430)
+                    _lastPos[i] = 1;
 
-                    if (_blockRect[i].Y >= 440)
-                        _lastPos[i] = 0;
+                if (_blockRect[i].Y >= 440)
+                    _lastPos[i] = 0;
 
-                    if (_lastPos[i]==1 )
-                    {
-                        _blockRect[i].Y = _blockRect[i].Y + 5;
-                    }
-                    else if ( _lastPos[i]==0 )
-                    {
-                        _blockRect[i].Y = _blockRect[i].Y - 5;
-                    }
-                    else
-                    {
-                        _blockRect[i].Y = _blockRect[i].Y + 5;
-                    }
+                if (_lastPos[i] == 1)
+                {
+                    _blockRect[i].Y = _blockRect[i].Y + 5;
+                }
+                else if (_lastPos[i] == 0)
+                {
+                    _blockRect[i].Y = _blockRect[i].Y - 5;
+                }
+                else
+                {
+                    _blockRect[i].Y = _blockRect[i].Y + 5;
+                }
 
-                
-                
+
+
 
 
                 if ((_persoPosition.X < _blockRect[i].X + _blockRect[i].Width) &&
@@ -110,14 +110,14 @@ namespace Project1.Core
                 (_persoPosition.Y + _persoRect.Height > _blockRect[i].Y))
                 {
 
-                    nbVies = nbVies -1;
+                    nbVies = nbVies - 1;
 
                     if (nbVies <= 0)
                     {
                         _myGame.LoadScreen0();
                     }
 
-                   
+
                 }
 
                 if (keyboardState.IsKeyDown(Keys.D) && (keyboardState.IsKeyDown(Keys.Space) || keyboardState.IsKeyDown(Keys.Right) && (keyboardState.IsKeyDown(Keys.Space))))
@@ -126,29 +126,29 @@ namespace Project1.Core
 
                     _blockRect[i].X = _blockRect[i].X - 10;
                     _persoRect = new Rectangle((int)_persoPosition.X, (int)_persoPosition.Y, 25, 50);
-                   
+
 
                 }
                 if (keyboardState.IsKeyDown(Keys.Q) && (keyboardState.IsKeyDown(Keys.Space) || keyboardState.IsKeyDown(Keys.Left) && (keyboardState.IsKeyDown(Keys.Space))))
                 {
-                   
+
                     _persoRect = new Rectangle((int)_persoPosition.X, (int)_persoPosition.Y, 25, 50);
-                  
+
                     _blockRect[i].X = _blockRect[i].X + 10;
-                    
+
 
                 }
 
 
             }
 
-            
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
 
-            for (int i = 0; i < 21; i++)
+            for (int i = 0; i < 35; i++)
             {
                 spriteBatch.Begin();
                 spriteBatch.Draw(_block, _blockRect[i], Color.White);
