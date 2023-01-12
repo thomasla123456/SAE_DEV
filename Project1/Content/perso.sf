@@ -25,15 +25,15 @@
       "isLooping": false,
       "frameDuration": 0.06
     },
-    "jumpEast": {
-      "frames": [179,178,177,176,175,174,173,172,171,170,169,168,191,190,189,188],
+    "slideEast": {
+      "frames": [184,185,186,187],
       "isLooping": false,
-      "frameDuration": 0.1
+      "frameDuration": 0.2
     },
-    "jumpWest": {
-      "frames": [36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51],
+    "slideWest": {
+      "frames": [55,54,53,52],
       "isLooping": false,
-      "frameDuration": 0.1
+      "frameDuration": 0.2
     }
   }
 }

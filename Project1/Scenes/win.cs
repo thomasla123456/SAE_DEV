@@ -12,12 +12,12 @@ using MonoGame.Extended.Screens;
 
 namespace Project1.Scenes
 {
-    public class gameover : GameScreen
+    public class win : GameScreen
     {
         private static GraphicsDeviceManager _graphics;
         private Game1 _myGame;
-      
-        public gameover(Game1 game) : base(game)
+
+        public win(Game1 game) : base(game)
         {
             _myGame = game;
 
@@ -25,7 +25,7 @@ namespace Project1.Scenes
         }
         public override void LoadContent()
         {
-          
+
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
@@ -37,9 +37,9 @@ namespace Project1.Scenes
         }
         public override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Orange);
+            GraphicsDevice.Clear(Color.Beige);
             _myGame.SpriteBatch.Begin();
-          
+
             _myGame.SpriteBatch.End();
         }
     }

@@ -34,6 +34,10 @@ namespace Project1.Scenes
 
         private AnimatedSprite _perso;
         private Vector2 _persoPosition;
+
+        private AnimatedSprite _porte;
+        private Vector2 _portePos;
+
         private int _persoVitesse;
         private Rectangle _persoRect;
 
@@ -41,9 +45,10 @@ namespace Project1.Scenes
         private Rectangle _blockRect;
 
 
+
         private int Gravite = 5;
         bool SAUT;
-
+        private SpriteFont text;
 
         public GameScene(Game1 game) : base(game)
         {
@@ -57,6 +62,15 @@ namespace Project1.Scenes
             bgRect = new Rectangle(-1000, 0, data.largeurEcran, data.longueurEcran);
             _block = Content.Load<Texture2D>("Texutres/block");
             _blockRect = new Rectangle(600, 500, 50, 50);
+
+
+            SpriteSheet porteSheet = Content.Load<SpriteSheet>("door.sf", new JsonContentLoader());
+            _porte = new AnimatedSprite(porteSheet);
+
+
+            text = Content.Load<SpriteFont>("Font");
+            SpriteBatch spriteBatch = new SpriteBatch(GraphicsDevice);
+
 
             obstacle.LoadContent(_block);
 
@@ -84,6 +98,7 @@ namespace Project1.Scenes
         {
             _persoVitesse = 0;
             _persoPosition = new Vector2(410, 630);
+            _portePos = new Vector2(7000, 640);  
             _persoRect = new Rectangle((int)_persoPosition.X,(int)_persoPosition.Y, 50, 50);
             base.Initialize();
         }
@@ -111,6 +126,8 @@ namespace Project1.Scenes
                 bgRect.X = bgRect.X + 5;
                 _blockRect.X = _blockRect.X + 5;
                 SAUT = true;
+                _portePos.X += 5; 
+
             }
 
             if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
@@ -120,30 +137,42 @@ namespace Project1.Scenes
                 _blockRect.X = _blockRect.X - 5;
                 _persoPosition.X += walkSpeed;
                 SAUT = true;
+                _portePos.X -= 5;
             }
             if (keyboardState.IsKeyDown(Keys.D) && (keyboardState.IsKeyDown(Keys.Space)  || keyboardState.IsKeyDown(Keys.Right) && (keyboardState.IsKeyDown(Keys.Space))))
             {
-                animation = "jumpEast";
+                animation = "slideEast";
                 _persoPosition.X += walkSpeed;
-                _persoPosition.Y = _persoPosition.Y - 6f;
+                bgRect.X = bgRect.X - 10;
+                _portePos.X -= 10;
+                _blockRect.X = _blockRect.X - 10;
+                _persoRect = new Rectangle((int)_persoPosition.X, (int)_persoPosition.Y, 25, 50);
                 SAUT = true;
+                
             }
             if (keyboardState.IsKeyDown(Keys.Q) && (keyboardState.IsKeyDown(Keys.Space) || keyboardState.IsKeyDown(Keys.Left) && (keyboardState.IsKeyDown(Keys.Space))))
             {
-                animation = "jumpWest";
+                animation = "slideWest";
                 _persoPosition.X -= walkSpeed;
-                _persoPosition.Y = _persoPosition.Y - 6f;
+                _persoRect = new Rectangle((int)_persoPosition.X, (int)_persoPosition.Y, 25, 50);
+                bgRect.X = bgRect.X + 10;
+                _blockRect.X = _blockRect.X + 10;
+                _portePos.X += 10;
                 SAUT = true;
+                
             }
 
-            if (keyboardState.IsKeyDown(Keys.Space))
+         
+
+
+
+            if (_portePos.X < _persoPosition.X)
             {
-                _persoPosition.Y = _persoPosition.Y - 12f;
-                SAUT = true;
-                _myGame.Etat = Game1.Etats.gameover;
+                _porte.Play("porte");
+                _porte.Update(gameTime);
+              
+                _myGame.LoadScreen2();
             }
-
-
             
          
             if (_persoPosition.Y > 630)
@@ -158,6 +187,8 @@ namespace Project1.Scenes
             GraphicsDevice.Clear(Color.Yellow);
             _myGame.SpriteBatch.Begin();
             _myGame.SpriteBatch.Draw(background, bgRect, Color.White);
+            _myGame.SpriteBatch.DrawString(text, "Hello World!", new Vector2(50, 50), Color.Black);
+            _myGame.SpriteBatch.Draw(_porte, _portePos);
             _myGame.SpriteBatch.Draw(_perso, _persoPosition);
             _myGame.SpriteBatch.End();
 

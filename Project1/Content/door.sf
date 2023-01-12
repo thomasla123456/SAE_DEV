@@ -1,0 +1,14 @@
+{
+  "textureAtlas": {
+    "texture": "door.png",
+    "regionWidth": 68,
+    "regionHeight": 96
+  },
+  "cycles": {
+    "porte": {
+      "frames": [0,1,2,3,4,5,6],
+      "isLooping": false,
+      "frameDuration": 0.2
+    }
+  }
+}
