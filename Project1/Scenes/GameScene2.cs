@@ -63,9 +63,9 @@ namespace Project1.Scenes
 
         public override void LoadContent()
         {
-            background = Content.Load<Texture2D>("Texutres/background");
+            background = Content.Load<Texture2D>("Texutres/background2");
             bgRect = new Rectangle(-1000, 0, data.largeurEcran, data.longueurEcran);
-            _block = Content.Load<Texture2D>("Texutres/block");
+            _block = Content.Load<Texture2D>("Texutres/block2");
             _blockRect = new Rectangle(600, 500, 50, 50);
             _panneau = Content.Load<Texture2D>("Texutres/panneau");
             _panneauRect = new Rectangle(-100, 560, 267 / 2, 279 / 2);

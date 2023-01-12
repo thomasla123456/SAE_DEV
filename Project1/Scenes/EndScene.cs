@@ -29,24 +29,24 @@ namespace Project1.Scenes
         }
         public override void LoadContent()
         {
-            _gagne = Content.Load<Texture2D>("Texutres/GAGNE");
+            _gagne = Content.Load<Texture2D>("Texutres/fintext");
             _gagneRect = new Rectangle(300, 200, 631, 387);
-            /*background = Content.Load<Texture2D>("Texutres/background");
-            bgRect = new Rectangle(-1000, 0, data.largeurEcran, data.longueurEcran);*/
+            background = Content.Load<Texture2D>("Texutres/background2");
+            bgRect = new Rectangle(-1000, 0, data.largeurEcran, data.longueurEcran);
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
-                _myGame.LoadScreen3();
+                
             }
         }
         public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Beige);
             _myGame.SpriteBatch.Begin();
-            /*_myGame.SpriteBatch.Draw(background, bgRect, Color.White);*/
+            _myGame.SpriteBatch.Draw(background, bgRect, Color.White);
             _myGame.SpriteBatch.Draw(_gagne, _gagneRect, Color.White);
             _myGame.SpriteBatch.End();
         }
