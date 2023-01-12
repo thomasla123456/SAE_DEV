@@ -162,8 +162,7 @@ namespace Project1.Core
         }
         public void LoadScreen2()
         {
-            _screenManager.LoadScreen(new win(this));
+            _screenManager.LoadScreen(new win(this), new FadeTransition(GraphicsDevice, Color.Black));
         }
-
     }
 }

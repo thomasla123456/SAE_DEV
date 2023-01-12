@@ -44,6 +44,9 @@ namespace Project1.Scenes
         private Texture2D _block;
         private Rectangle _blockRect;
 
+        private Texture2D _panneau;
+        private Rectangle _panneauRect;
+
 
 
         private int Gravite = 5;
@@ -63,6 +66,8 @@ namespace Project1.Scenes
             bgRect = new Rectangle(-1000, 0, data.largeurEcran, data.longueurEcran);
             _block = Content.Load<Texture2D>("Texutres/block");
             _blockRect = new Rectangle(600, 500, 50, 50);
+            _panneau = Content.Load<Texture2D>("Texutres/panneau");
+            _panneauRect = new Rectangle(-100, 560, 267/2, 279/2);
 
 
             SpriteSheet porteSheet = Content.Load<SpriteSheet>("door.sf", new JsonContentLoader());
@@ -127,7 +132,8 @@ namespace Project1.Scenes
                 bgRect.X = bgRect.X + 5;
                 _blockRect.X = _blockRect.X + 5;
                 SAUT = true;
-                _portePos.X += 5; 
+                _portePos.X += 5;
+                _panneauRect.X = _panneauRect.X+5;
 
             }
 
@@ -139,6 +145,7 @@ namespace Project1.Scenes
                 _persoPosition.X += walkSpeed;
                 SAUT = true;
                 _portePos.X -= 5;
+                _panneauRect.X = _panneauRect.X - 5;
             }
             if (keyboardState.IsKeyDown(Keys.D) && (keyboardState.IsKeyDown(Keys.Space)  || keyboardState.IsKeyDown(Keys.Right) && (keyboardState.IsKeyDown(Keys.Space))))
             {
@@ -148,6 +155,7 @@ namespace Project1.Scenes
                 _portePos.X -= 10;
                 _blockRect.X = _blockRect.X - 10;
                 _persoRect = new Rectangle((int)_persoPosition.X, (int)_persoPosition.Y, 25, 50);
+                _panneauRect.X = _panneauRect.X - 10;
                 SAUT = true;     
             }
             if (keyboardState.IsKeyDown(Keys.Q) && (keyboardState.IsKeyDown(Keys.Space) || keyboardState.IsKeyDown(Keys.Left) && (keyboardState.IsKeyDown(Keys.Space))))
@@ -158,9 +166,13 @@ namespace Project1.Scenes
                 bgRect.X = bgRect.X + 10;
                 _blockRect.X = _blockRect.X + 10;
                 _portePos.X += 10;
+                _panneauRect.X = _panneauRect.X + 10;
                 SAUT = true;
                 
             }
+
+            
+
 
          
 
@@ -168,12 +180,20 @@ namespace Project1.Scenes
 
             if (_portePos.X < _persoPosition.X)
             {
+                _persoPosition.X = _portePos.X;
                 _porte.Play("porte");
                 _porte.Update(gameTime);
               
                 _myGame.LoadScreen2();
             }
-                    
+
+            if (_panneauRect.X >= _persoPosition.X)
+            {
+                _persoPosition.X = _panneauRect.X;
+
+
+            }
+
             if (_persoPosition.Y > 630)
                 _persoPosition.Y = 630;
 
@@ -188,6 +208,7 @@ namespace Project1.Scenes
             _myGame.SpriteBatch.Draw(background, bgRect, Color.White);
             _myGame.SpriteBatch.DrawString(text, "Vies Restantes : " + Obstacle.nbVies, new Vector2(50, 50), Color.Black);
             _myGame.SpriteBatch.Draw(_porte, _portePos);
+            _myGame.SpriteBatch.Draw(_panneau, _panneauRect, Color.White);
             _myGame.SpriteBatch.Draw(_perso, _persoPosition);
             _myGame.SpriteBatch.End();
 
