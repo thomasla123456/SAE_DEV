@@ -16,6 +16,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.TextureAtlases;
 using System.Reflection.Metadata;
+using Project1.Scenes;
 
 namespace Project1.Core
 {
@@ -25,9 +26,9 @@ namespace Project1.Core
 
         private Rectangle[] _blockRect;
         private int[] _lastPos;
-
+        private Rectangle bgRect;
         private Game1 _myGame;
-
+        public static int nbVies = 3;
 
         int largeur = 500;
 
@@ -41,11 +42,13 @@ namespace Project1.Core
 
         public void LoadContent(Texture2D _block2)
         {
+            bgRect = new Rectangle(-1000, 0, data.largeurEcran, data.longueurEcran);
+
             _block = _block2;
 
             for(int i = 0; i < 21; i++)
             {
-                int rd = new Random().Next(430, 440);
+                int rd = new Random().Next(430, 640);
          
              
                     
@@ -81,7 +84,7 @@ namespace Project1.Core
                     if (_blockRect[i].Y <= 430)
                         _lastPos[i] = 1;
 
-                    if (_blockRect[i].Y >= 440)
+                    if (_blockRect[i].Y >= 640)
                         _lastPos[i] = 0;
 
                     if (_lastPos[i]==1 )
@@ -105,15 +108,16 @@ namespace Project1.Core
                 (_persoPosition.X > _blockRect[i].X) &&
                 (_persoPosition.Y < _blockRect[i].Y + _block.Height) &&
                 (_persoPosition.Y + _persoRect.Height > _blockRect[i].Y))
-                {
-                    /*_persoPosition.X = 100;
-                    bgRect.X = -1000;
-                    bgRect.Y = 0;
-                    _blockRect.X = 600;
-                    _blockRect.Y = 500;
-                    */
+                {           
+                  
+                    nbVies --;
 
-                    _myGame.LoadScreen0();
+                    if (nbVies <= 0)
+                    {
+                        _myGame.LoadScreen0();
+                    }
+
+                   
                 }
 
                 if (keyboardState.IsKeyDown(Keys.D) && (keyboardState.IsKeyDown(Keys.Space) || keyboardState.IsKeyDown(Keys.Right) && (keyboardState.IsKeyDown(Keys.Space))))

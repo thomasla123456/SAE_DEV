@@ -49,6 +49,7 @@ namespace Project1.Scenes
         private int Gravite = 5;
         bool SAUT;
         private SpriteFont text;
+ 
 
         public GameScene(Game1 game) : base(game)
         {
@@ -147,8 +148,7 @@ namespace Project1.Scenes
                 _portePos.X -= 10;
                 _blockRect.X = _blockRect.X - 10;
                 _persoRect = new Rectangle((int)_persoPosition.X, (int)_persoPosition.Y, 25, 50);
-                SAUT = true;
-                
+                SAUT = true;     
             }
             if (keyboardState.IsKeyDown(Keys.Q) && (keyboardState.IsKeyDown(Keys.Space) || keyboardState.IsKeyDown(Keys.Left) && (keyboardState.IsKeyDown(Keys.Space))))
             {
@@ -173,8 +173,7 @@ namespace Project1.Scenes
               
                 _myGame.LoadScreen2();
             }
-            
-         
+                    
             if (_persoPosition.Y > 630)
                 _persoPosition.Y = 630;
 
@@ -187,7 +186,7 @@ namespace Project1.Scenes
             GraphicsDevice.Clear(Color.Yellow);
             _myGame.SpriteBatch.Begin();
             _myGame.SpriteBatch.Draw(background, bgRect, Color.White);
-            _myGame.SpriteBatch.DrawString(text, "Hello World!", new Vector2(50, 50), Color.Black);
+            _myGame.SpriteBatch.DrawString(text, "Vies Restantes : " + Obstacle.nbVies, new Vector2(50, 50), Color.Black);
             _myGame.SpriteBatch.Draw(_porte, _portePos);
             _myGame.SpriteBatch.Draw(_perso, _persoPosition);
             _myGame.SpriteBatch.End();

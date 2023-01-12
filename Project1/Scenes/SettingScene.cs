@@ -34,7 +34,7 @@ namespace Project1.Scenes
             background = Content.Load<Texture2D>("Texutres/background");
             bgRect = new Rectangle(0, 0, data.largeurEcran, data.longueurEcran);
             controle = Content.Load<Texture2D>("Texutres/controle");
-            controleRect = new Rectangle(0, 0, 1640, 664);
+            controleRect = new Rectangle(0, 0, 775, 556);
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
