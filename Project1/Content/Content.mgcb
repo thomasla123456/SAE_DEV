@@ -13,30 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin ../../../../../../Desktop/controle.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../../../Desktop/controle.png;Texutres/controle.png
-
-#begin ../../../../../../Desktop/musique.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:../../../../../../Desktop/musique.mp3;musique.mp3
-
-#begin ../../../../../../Desktop/saut.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:../../../../../../Desktop/saut.mp3;saut.mp3
-
 #begin door.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -63,6 +39,12 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/TextFont.spritefont
 
+#begin musique.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:musique.mp3
+
 #begin perso.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -74,6 +56,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:perso.png
+
+#begin saut.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:saut.mp3
 
 #begin Texutres/1.png
 /importer:TextureImporter
@@ -170,6 +158,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Texutres/btn2.png
+
+#begin Texutres/controle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texutres/controle.png
 
 #begin Texutres/fond.png
 /importer:TextureImporter
