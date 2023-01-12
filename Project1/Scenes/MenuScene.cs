@@ -35,7 +35,7 @@ namespace Project1
 
         public override void LoadContent()
         {
-            _textBoutons = Content.Load<Texture2D>($"Texutres/boutons");
+            _textBoutons = Content.Load<Texture2D>($"Texutres/bouton");
             background = Content.Load<Texture2D>("Texutres/background");
             bgRect = new Rectangle(0, 0, data.largeurEcran, data.longueurEcran);
 

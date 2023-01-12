@@ -129,7 +129,7 @@
 /processorParam:TextureFormat=Color
 /build:Texutres/block.png
 
-#begin Texutres/boutons.png
+#begin Texutres/bouton.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -139,7 +139,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Texutres/boutons.png
+/build:Texutres/bouton.png
 
 #begin Texutres/btn0.png
 /importer:TextureImporter
@@ -176,6 +176,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Texutres/btn2.png
+
+#begin Texutres/controle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texutres/controle.png
 
 #begin Texutres/controle.png
 /importer:TextureImporter
