@@ -38,8 +38,6 @@ namespace Project1.Scenes
             _myGame.SpriteBatch.Begin();
           
             _myGame.SpriteBatch.End();
-
-
         }
     }
 }

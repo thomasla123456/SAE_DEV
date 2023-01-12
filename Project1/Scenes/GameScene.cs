@@ -30,6 +30,7 @@ namespace Project1.Scenes
         private KeyboardState kb;
         private int vitesse = 5;
 
+        Obstacle obstacle;
 
         private AnimatedSprite _perso;
         private Vector2 _persoPosition;
@@ -47,14 +48,19 @@ namespace Project1.Scenes
         public GameScene(Game1 game) : base(game)
         {
             _myGame = game;
+            obstacle = new Obstacle(game);
         }
 
         public override void LoadContent()
         {
             background = Content.Load<Texture2D>("Texutres/background");
-            bgRect = new Rectangle(0, 0, data.largeurEcran, data.longueurEcran);
+            bgRect = new Rectangle(-1000, 0, data.largeurEcran, data.longueurEcran);
             _block = Content.Load<Texture2D>("Texutres/block");
-            _blockRect = new Rectangle(400, 500, 100, 100);
+            _blockRect = new Rectangle(600, 500, 50, 50);
+
+            obstacle.LoadContent(_block);
+
+            
 
 
             Song song = Content.Load<Song>("musique");
@@ -84,6 +90,8 @@ namespace Project1.Scenes
 
         public override void Update(GameTime gameTime)
         {
+            obstacle.Update(_persoPosition, _persoRect);
+
             kb = Keyboard.GetState();          
             _persoPosition.Y = _persoPosition.Y + Gravite;
             SAUT = false;
@@ -136,24 +144,13 @@ namespace Project1.Scenes
             }
 
 
-            if ((_persoPosition.X < _blockRect.X + _blockRect.Width) &&
-            (_persoPosition.X  > _blockRect.X) &&
-            (_persoPosition.Y < _blockRect.Y + _block.Height) &&
-            (_persoPosition.Y + _persoRect.Height > _blockRect.Y))
-            {
-                _persoPosition.X = 0;
-              
-            }
+            
          
-
-
-
             if (_persoPosition.Y > 630)
                 _persoPosition.Y = 630;
 
             _perso.Play(animation);
             _perso.Update(deltaSeconds);
-
 
         }
         public override void Draw(GameTime gameTime)
@@ -162,8 +159,9 @@ namespace Project1.Scenes
             _myGame.SpriteBatch.Begin();
             _myGame.SpriteBatch.Draw(background, bgRect, Color.White);
             _myGame.SpriteBatch.Draw(_perso, _persoPosition);
-            _myGame.SpriteBatch.Draw(_block, _blockRect, Color.White);
-            _myGame.SpriteBatch.End(); 
+            _myGame.SpriteBatch.End();
+
+            obstacle.Draw(_myGame.SpriteBatch);
         }
 
     }

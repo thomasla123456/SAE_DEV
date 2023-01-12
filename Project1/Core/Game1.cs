@@ -21,6 +21,7 @@ namespace Project1.Core
         private MenuScene _screenMenu;
         private GameScene _screenPlay;
         private SettingScene _screenSetting;
+        private gameover _gameOverScene;
 
         private GameStateManager gsm;
 
@@ -68,6 +69,7 @@ namespace Project1.Core
             _screenMenu = new MenuScene(this);
             _screenPlay = new GameScene(this);
             _screenSetting = new SettingScene(this);
+            _gameOverScene = new gameover(this);
         }
 
         protected override void Initialize()
@@ -141,8 +143,16 @@ namespace Project1.Core
             _spriteBatch.Begin();
             gsm.Draw(_spriteBatch);
             _spriteBatch.End();
+            
+
 
             base.Draw(gameTime);
+        }
+
+
+        public void LoadScreen0()
+        {
+            _screenManager.LoadScreen(new gameover(this));
         }
     }
 }
