@@ -107,7 +107,7 @@ namespace Project1.Scenes
         {
             _persoVitesse = 0;
             _persoPosition = new Vector2(410, 630);
-            _portePos = new Vector2(7000, 640);  
+            _portePos = new Vector2(7000, 645);  
             _persoRect = new Rectangle((int)_persoPosition.X,(int)_persoPosition.Y, 50, 50);
             base.Initialize();
         }

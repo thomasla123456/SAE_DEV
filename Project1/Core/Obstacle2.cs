@@ -46,14 +46,14 @@ namespace Project1.Core
 
             _block = _block2;
 
-            for (int i = 0; i < 35; i++)
+            for (int i = 0; i < 26; i++)
             {
-                int rd = new Random().Next(430, 440);
+                int rd = new Random().Next(380, 440);
 
 
 
-                _blockRect[i] = new Rectangle(largeur, rd, 50, 50);
-                largeur += 180;
+                _blockRect[i] = new Rectangle(largeur, rd, 100, 100);
+                largeur += 240;
 
             }
 
@@ -66,7 +66,7 @@ namespace Project1.Core
 
 
 
-            for (int i = 0; i < 35; i++)
+            for (int i = 0; i < 26; i++)
             {
                 if (keyboardState.IsKeyDown(Keys.Q) || keyboardState.IsKeyDown(Keys.Left))
                 {
@@ -81,7 +81,7 @@ namespace Project1.Core
 
                 }
 
-                if (_blockRect[i].Y <= 430)
+                if (_blockRect[i].Y <= 380)
                     _lastPos[i] = 1;
 
                 if (_blockRect[i].Y >= 440)
@@ -148,7 +148,7 @@ namespace Project1.Core
         public void Draw(SpriteBatch spriteBatch)
         {
 
-            for (int i = 0; i < 35; i++)
+            for (int i = 0; i < 26; i++)
             {
                 spriteBatch.Begin();
                 spriteBatch.Draw(_block, _blockRect[i], Color.White);
