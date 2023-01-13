@@ -34,16 +34,15 @@ namespace Project1.Scenes
             background = Content.Load<Texture2D>("Texutres/background");
             bgRect = new Rectangle(0, 0, data.largeurEcran, data.longueurEcran);
             controle = Content.Load<Texture2D>("Texutres/controle");
-            controleRect = new Rectangle(150, 100, 775, 556);
+            controleRect = new Rectangle(300, 100, 775, 556);
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
         {
-            /*var keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.H))
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
-                _myGame.Etat = Game1.Etats.Menu;
-            }*/
+                _myGame.LoadScreen5();
+            }
         }
         public override void Draw(GameTime gameTime)
         {

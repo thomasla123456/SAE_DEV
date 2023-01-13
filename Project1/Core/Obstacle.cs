@@ -48,7 +48,7 @@ namespace Project1.Core
 
             for(int i = 0; i < 21; i++)
             {
-                int rd = new Random().Next(430, 440);
+                int rd = new Random().Next(430, 640);
          
              
                     
@@ -84,7 +84,7 @@ namespace Project1.Core
                     if (_blockRect[i].Y <= 430)
                         _lastPos[i] = 1;
 
-                    if (_blockRect[i].Y >= 440)
+                    if (_blockRect[i].Y >= 640)
                         _lastPos[i] = 0;
 
                     if (_lastPos[i]==1 )

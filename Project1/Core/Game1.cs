@@ -176,5 +176,9 @@ namespace Project1.Core
         {
             _screenManager.LoadScreen(new EndScene(this), new FadeTransition(GraphicsDevice, Color.Black));
         }
+        public void LoadScreen5()
+        {
+            _screenManager.LoadScreen(new MenuScene(this), new FadeTransition(GraphicsDevice, Color.Black));
+        }
     }
 }
