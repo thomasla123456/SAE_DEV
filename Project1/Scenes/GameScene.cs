@@ -212,7 +212,7 @@ namespace Project1.Scenes
             GraphicsDevice.Clear(Color.Yellow);
             _myGame.SpriteBatch.Begin();
             _myGame.SpriteBatch.Draw(background, bgRect, Color.White);
-            _myGame.SpriteBatch.DrawString(text, "Vies Restantes : " + Obstacle.nbVies, new Vector2(50, 50), Color.Black);
+         
             _myGame.SpriteBatch.Draw(_porte, _portePos);
             _myGame.SpriteBatch.Draw(_panneau, _panneauRect, Color.White);
             _myGame.SpriteBatch.Draw(_perso, _persoPosition);
